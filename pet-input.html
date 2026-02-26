@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pet Input</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
+<header class="main-header">
+<div class="logo">🐾 PetGlow</div>
+<nav class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="doctor.html">Veterinary Experts</a>
+<a href="dietplan.html">Diet Plan</a>
+<a href="contact.html">Contact</a>
+<a href="appointment.html">Appointment</a>
+<a href="services.html">Services</a>
+<a href="login.html">Login</a>
+</nav>
+</header>
+
+<style>
+body{
+font-family:sans-serif;
+background:linear-gradient(135deg,#667eea,#764ba2);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.form-box{
+background:white;
+padding:30px;
+border-radius:15px;
+width:320px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+h2{
+text-align:center;
+margin-bottom:15px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#764ba2;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#5a3580;
+}
+</style>
+</head>
+
+<body>
+
+<div class="form-box">
+<h2>Add Pet Details</h2>
+
+<input type="text" id="name" placeholder="Pet Name">
+<input type="text" id="breed" placeholder="Breed">
+<input type="number" id="age" placeholder="Age">
+<input type="number" id="bmi" placeholder="BMI">
+
+<button onclick="saveData()">Save</button>
+</div>
+
+<script>
+function saveData(){
+
+let name = document.getElementById("name").value;
+let breed = document.getElementById("breed").value;
+let age = document.getElementById("age").value;
+let bmi = document.getElementById("bmi").value;
+
+localStorage.setItem("petName", name);
+localStorage.setItem("petBreed", breed);
+localStorage.setItem("petAge", age);
+localStorage.setItem("petBMI", bmi);
+
+window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>

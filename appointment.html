@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetGlow - Premium Pet Store</title>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+
+
+<!-- HEADER -->
+
+<header class="main-header">
+<div class="logo">🐾 PetGlow</div>
+
+<nav class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="doctor.html">Veterinary Experts</a>
+<a href="dietplan.html">Diet Plan</a>
+<a href="contact.html">Contact</a>
+<a href="appointment.html">Appointment</a>
+<a href="services.html">Services</a>
+<a href="login.html">Login</a>
+</nav>
+</header>
+<style>
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:url('https://images.unsplash.com/photo-1551601651-2a8555f1a136') no-repeat center/cover;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+}
+
+.container{
+    position:relative;
+    z-index:2;
+    width:900px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(12px);
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+/* LEFT & RIGHT CARDS */
+.card{
+    background:rgba(255,255,255,0.18);
+    backdrop-filter:blur(8px);
+    padding:20px;
+    border-radius:12px;
+}
+
+h2{
+    text-align:center;
+    color:white;
+    margin-bottom:15px;
+}
+
+label{
+    color:white;
+    margin-top:10px;
+    display:block;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#28a745;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#218838;
+    transform:scale(1.03);
+}
+
+/* DOCTOR INFO */
+#docInfo{
+    margin-top:10px;
+    padding:8px;
+    background:rgba(255,255,255,0.2);
+    color:white;
+    border-radius:8px;
+    font-size:14px;
+    display:none;
+}
+
+/* SUCCESS */
+#success{
+    grid-column: span 2;
+    display:none; 
+    padding:10px;
+    background:#28a745;
+    color:white;
+    text-align:center;
+    border-radius:8px;
+}
+
+@media (max-width: 900px){
+    .container{
+        grid-template-columns:1fr;
+        
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- LEFT SIDE -->
+    <div class="card">
+        <h2>Pet & Doctor Info</h2>
+
+        <form>
+            <label>Pet Name</label>
+            <input type="text" required>
+
+            <label>Service</label>
+            <select>
+                <option>Veterinary Consultation</option>
+                <option>Diet Plan</option>
+                <option>Fitness Checkup</option>
+                <option>Vaccination</option>
+                <option> Emergency Care</option>
+            </select>
+
+            <label>Select Doctor</label>
+            <select id="doctor">
+                <option value="Dr. Sarah Thompson | Specialization: Canine Health & Surgery | Experience: 10+ years | Time: 10AM - 2PM">
+                    Dr. Sarah Thompson —  Canine Health & Surgery | 10+ years
+                </option>
+                <option value="Dr. Rajesh Nair | Specialization: Feline Medicine & Nutrition | Experience: 8+ years | Time: 11AM - 3PM">
+                    Dr. Rajesh Nair — Feline Medicine & Nutrition | 8+ Years
+                </option>
+                <option value="Dr. Emily Carter | Specialization: Exotic Pets & Birds | Experience: 6+ years | Time: 2PM - 6PM">
+                    Dr. Emily Carter — Specialization: Exotic Pets & Birds | 6+ Years
+                </option>
+                <option value="Dr. Amit Sharma | Specialization: Skin & Infectious Diseases | Experience: 12+ years | Time: 2PM - 6PM">
+                    Dr. Amit Sharma — Specialization: Skin & Infectious Diseases | 12+ Years
+                </option>
+            </select>
+
+            <div id="docInfo"></div>
+        </form>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="card">
+        <h2>Appointment Slot</h2>
+
+        <label>Slot</label>
+        <select>
+            <option>10:00 AM - 11:00 AM</option>
+            <option>11:00 AM - 12:00 PM</option>
+            <option>12:00 PM - 01:00 PM</option>
+            <option>02:00 PM - 03:00 PM</option>
+            <option>03:00 PM - 04:00 PM</option>
+        </select>
+
+        <label>Date</label>
+        <input type="date" required>
+
+        <label>Message</label>
+        <textarea rows="2" placeholder="Additional details"></textarea>
+
+        <button id="bookBtn">Book Now</button>
+    </div>
+
+    <div id="success">✅ Appointment Successfully Booked!</div>
+
+</div>
+
+<script>
+if(localStorage.getItem("loggedIn") !== "true"){
+    window.location.href = "login.html";
+}   
+const doctor = document.getElementById("doctor");
+const docInfo = document.getElementById("docInfo");
+const success = document.getElementById("success");
+const bookBtn = document.getElementById("bookBtn");
+const form = document.querySelector("form");
+
+
+docInfo.style.display = "block";
+docInfo.textContent = doctor.value;
+
+doctor.addEventListener("change", function(){
+    docInfo.style.display = "block";
+    docInfo.textContent = this.value;
+});
+
+bookBtn.addEventListener("click", function(e){
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    success.style.display = "block";
+
+    setTimeout(() => {
+        success.style.display = "none";
+        form.reset();
+        docInfo.style.display = "none";
+    }, 4000);
+});
+
+function logout(){
+   localStorage.removeItem("loggedIn");
+   window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

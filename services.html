@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetGlow - Premium Pet Store</title>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+
+
+<!-- HEADER -->
+
+<header class="main-header">
+<div class="logo">🐾 PetGlow</div>
+
+<nav class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="doctor.html">Veterinary Experts</a>
+<a href="dietplan.html">Diet Plan</a>
+<a href="contact.html">Contact</a>
+<a href="appointment.html">Appointment</a>
+<a href="services.html">Services</a>
+<a href="login.html">Login</a>
+</nav>
+</header>
+<style>
+
+
+/* Background Image */
+body{
+min-height:100vh;
+background:url('image2.jpg') no-repeat center center/cover;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:40px 20px;
+}
+
+/* Dark Overlay */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+/* Heading */
+h1{
+color:white;
+margin-bottom:40px;
+font-size:42px;
+text-shadow:2px 2px 10px rgba(0,0,0,0.6);
+}
+
+/* Services Grid */
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+width:100%;
+max-width:1100px;
+}
+.card ul{
+list-style:none;       
+margin:15px 0;
+list-style:disc;     
+padding-left:20px;    
+
+}
+
+.card ul li{
+display:flex;
+justify-content:center;   
+align-items:center;
+text-align:justify; 
+gap:8px;                 
+margin:6px 0;
+font-size:15px;
+}
+
+.card ul li::before{
+content:"•";
+color:#0072ff;
+font-size:18px;
+}
+
+/* Service Card */
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 15px 35px rgba(0,0,0,0.3);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+.card h2{
+margin-bottom:12px;
+color:#333;
+}
+
+.card p{
+font-size:14px;
+margin-bottom:18px;
+color:#555;
+}
+
+/* Button Style */
+button{
+padding:10px 22px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#00c6ff,#0072ff);
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+margin-top:20px;   
+}
+
+button:hover{
+transform:scale(1.08);
+background:linear-gradient(45deg,#0072ff,#00c6ff);
+}
+</style>
+</head>
+
+<body>
+<br><br><br>
+<h1>🐾 Our Pet Care Services</h1>
+
+<div class="services">
+<div class="card">
+<h2>🩺 Veterinary Checkup</h2>
+<p>Complete health checkup for your pets by expert doctors.</p>
+<ul>
+<li>Full Body Checkup</li>
+<li>Health Report</li>
+</ul>
+<button onclick="goAppointment()">Book Now</button>
+</div>
+
+<div class="card">
+<h2>💉 Vaccination</h2>
+<p>Safe and timely vaccinations to keep your pet healthy.</p>
+<ul>
+<li>Rabies Vaccine</li>
+<li>Booster Doses</li>
+</ul>
+<button onclick="goAppointment()">Book Now</button>
+</div>
+
+<div class="card">
+<h2>🥗 Diet Planning</h2>
+<p>Customized nutrition plans for different breeds.</p>
+<ul>
+<li>Breed Specific Plan</li>
+<li>Weight Management</li>
+</ul>
+<a href="dietplan.html">
+<button>View Plan</button>
+</a>
+</div>
+
+<div class="card">
+<h2>🛁 Grooming</h2>
+<p>Premium grooming services for a clean and happy pet.</p>
+<ul>
+<li>Bath & Dry</li>
+<li>Nail Cutting</li>
+</ul>
+<button onclick="goAppointment()">Book Now</button>
+</div>
+
+<div class="card">
+<h2>🚑 Emergency Care</h2>
+<p>24/7 emergency medical support for pets.</p>
+<ul>
+<li>Immediate Treatment</li>
+<li>Expert Doctors</li>
+</ul>
+<a href="contact.html">
+<button>Contact Us</button>
+</a>
+</div>
+</div>
+
+<script>
+function goAppointment(){
+window.location.href="appointment.html";
+}
+</script>
+
+</body>
+</html>

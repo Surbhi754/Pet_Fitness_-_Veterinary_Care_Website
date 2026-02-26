@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetGlow - Premium Pet Store</title>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+
+
+<!-- HEADER -->
+
+<header class="main-header">
+<div class="logo">🐾 PetGlow</div>
+
+<nav class="navbar">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="doctor.html">Veterinary Experts</a>
+<a href="dietplan.html">Diet Plan</a>
+<a href="contact.html">Contact</a>
+<a href="appointment.html">Appointment</a>
+<a href="services.html">Services</a>
+<a href="login.html">Login</a>
+</nav>
+</header>
+<style>
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:url("https://images.unsplash.com/photo-1517849845537-4d257902454a") no-repeat center/cover;
+}
+
+body::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:0;
+}
+
+.container{
+position:relative;
+z-index:1;
+background:white;
+padding:40px;
+border-radius:20px;
+width:900px;
+display:flex;
+gap:30px;
+box-shadow:0 15px 35px rgba(0,0,0,0.3);
+align-items:stretch; 
+border:2px solid #e5e5e5;
+}
+
+
+
+h1{
+margin-bottom:20px;
+text-align:center;
+}
+
+select, input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #ccc;
+outline:none;
+}
+
+button{
+padding:12px;
+width:100%;
+border:none;
+border-radius:30px;
+background:#ff6b6b;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#ff3b3b;
+transform:scale(1.05);
+}
+
+.form-section,
+.result{
+flex:1;                 
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.result h3{
+color:#ff3b3b;
+margin-bottom:10px;
+}
+.result-title{
+text-align:center;
+font-size:32px;     /* Change size here */
+font-weight:700;
+margin-bottom:20px;
+color:#000000;
+}
+.result ul{
+padding-left:20px;
+margin-bottom:15px;
+}
+
+.result img{
+display:block;
+margin:15px auto;
+width:130px;
+}
+
+.bmi-text{
+text-align:center;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="form-section">
+
+<h1>🐶 Pet BMI & Diet</h1>
+
+<select id="petType" onchange="changeBackground()">
+  <option value="dog">Dog</option>
+  <option value="cat">Cat</option>
+</select>
+
+<input type="number" id="age" placeholder="Age (years)">
+<input type="number" id="weight" placeholder="Weight (kg)">
+<input type="number" id="height" placeholder="Height (meters)">
+
+<button onclick="calculateBMI()">Check Diet Plan</button><br>
+<button onclick="logout()">Logout</button>
+</div>
+
+<div class="result" id="resultBox"></div>
+
+</div>
+
+<script>
+function changeBackground(){
+    let pet = document.getElementById("petType").value;
+
+    if(pet == "dog"){
+        document.body.style.background =
+        "url('dog2.jpg') no-repeat center/cover";
+    } 
+    else {
+        document.body.style.background =
+        "url('cat1.jpg') no-repeat center/cover";
+    }
+}
+function calculateBMI(){
+
+let petType = document.getElementById("petType").value;
+let weight = parseFloat(document.getElementById("weight").value);
+let height = parseFloat(document.getElementById("height").value);
+let age = parseInt(document.getElementById("age").value);
+
+if(!weight || !height || !age){
+alert("Enter all values");
+return;
+}
+
+let bmi = weight / (height * height);
+bmi = bmi.toFixed(1);
+
+let ageType = "";
+
+if(age <= 2){
+ageType = "Puppy/Kitten";
+}
+else if(age <= 7){
+ageType = "Adult";
+}
+else{
+ageType = "Senior";
+}
+
+let diet = "";
+let imageURL = "";
+
+/* BMI + PET TYPE */
+
+if(bmi < 18.5){
+
+imageURL = petType === "dog"
+? "https://cdn-icons-png.flaticon.com/512/616/616408.png"
+: "https://cdn-icons-png.flaticon.com/512/616/616430.png";
+
+diet = `
+<h3>Underweight (${ageType})</h3>
+<ul>
+<li>High Protein Diet</li>
+<li>3-4 Small Meals</li>
+<li>Healthy Fats</li>
+<li>Calcium Supplements</li>
+</ul>
+`;
+
+}
+else if(bmi < 25){
+
+imageURL = petType === "dog"
+? "https://cdn-icons-png.flaticon.com/512/616/616430.png"
+: "https://cdn-icons-png.flaticon.com/512/616/616554.png";
+
+diet = `
+<h3>Normal Weight (${ageType})</h3>
+<ul>
+<li>Balanced Diet</li>
+<li>Vegetables</li>
+<li>Hydration</li>
+<li>Exercise</li>
+</ul>
+`;
+
+}
+else{
+
+imageURL = petType === "dog"
+? "https://cdn-icons-png.flaticon.com/512/616/616554.png"
+: "https://cdn-icons-png.flaticon.com/512/616/616408.png";
+
+diet = `
+<h3>Overweight (${ageType})</h3>
+<ul>
+<li>Low Calorie Food</li>
+<li>High Fiber</li>
+<li>Avoid Treats</li>
+<li>Daily Walk</li>
+</ul>
+`;
+
+}
+
+let resultBox = document.getElementById("resultBox");
+resultBox.style.display = "block";
+
+resultBox.innerHTML = `
+<h2 class="result-title">
+🐶 Diet Plan Result
+</h2>
+
+${diet}
+
+<img src="${imageURL}">
+
+<p class="bmi-text">BMI: ${bmi}</p>
+`;
+// Get old history
+let history = JSON.parse(localStorage.getItem("dietHistory")) || [];
+
+// New result object
+let newResult = {
+    petType: petType,
+    ageType: ageType,
+    bmi: bmi,
+    diet: diet,
+    image: imageURL,
+    date: new Date().toLocaleString()
+};
+
+// Add to history array
+history.push(newResult);
+
+// Save back to localStorage
+localStorage.setItem("dietHistory", JSON.stringify(history));
+
+}
+window.onload = changeBackground;
+if(localStorage.getItem("loggedIn") !== "true"){
+    window.location.href = "login.html";
+}
+function logout(){
+   localStorage.removeItem("loggedIn");
+   window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
+
+
+
